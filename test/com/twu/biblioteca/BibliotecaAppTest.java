@@ -3,8 +3,11 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.print.Book;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
@@ -20,7 +23,14 @@ public class BibliotecaAppTest {
     @Test
     public void seeOpeningMessageUponApplicationStart(){
         BibliotecaApp.start();
-        assertEquals("Welcome to Biblioteca!", outContent.toString());
+        String expected = "Welcome to Biblioteca!\n";
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void ListBooks(){
+        ArrayList<String> bookList = BibliotecaApp.listBooks();
+        assertTrue(bookList.size() == 3);
     }
 
 }
