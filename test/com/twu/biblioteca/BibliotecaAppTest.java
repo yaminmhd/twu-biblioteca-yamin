@@ -3,7 +3,6 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.print.Book;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -21,15 +20,15 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void seeOpeningMessageUponApplicationStart(){
+    public void shouldDisplayWelcomeMessage(){
         BibliotecaApp.start();
         String expected = "Welcome to Biblioteca!\n";
         assertEquals(expected, outContent.toString());
     }
 
     @Test
-    public void ListBooks(){
-        ArrayList<String> bookList = BibliotecaApp.listBooks();
+    public void shouldDisplayListofBooksAsBookObjects(){
+        ArrayList<Book> bookList = BibliotecaApp.listBooks();
         assertTrue(bookList.size() == 3);
     }
 
