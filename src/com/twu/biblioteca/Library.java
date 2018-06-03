@@ -25,33 +25,38 @@ public class Library {
         System.out.println("Total of " + bookList.size() + " books in the library");
     }
 
-
     public void displayMenuOptions() {
-        char quit = 'n';
-        while(quit != 'y' ){
-            char choice = getInput();
-            switch(choice){
-                case '1': displayBooks();
-                    break;
+        String choice;
+        do{
+            showMenuMessage();
+            choice = getInput();
+            selectMenuOptionWithChoice(choice);
+        } while(!choice.equals("q"));
+    }
 
-                case '2': quit = 'y';
-                    break;
+    public void selectMenuOptionWithChoice(String choice) {
+        switch(choice){
+            case "1":
+                displayBooks();
+                break;
 
-                default:
-                    System.out.println("Select a valid option!");
-            }
+            case "q":
+                break;
+
+            default:
+                System.out.println("Select a valid option!");
         }
     }
 
-    private char getInput() {
+    public String getInput() {
         Scanner in = new Scanner(System.in);
-        String optionMessage = "\nChoose a menu option\n\n" +
-                "1 - List Books\n" +
-                "2 - Quit\n";
+        return in.next().toLowerCase();
+    }
 
-        System.out.println(optionMessage);
-        String input =  in.nextLine();
-        return input.charAt(0);
+    public void showMenuMessage() {
+        System.out.println("\nChoose a menu option\n\n" +
+                "1 - List Books\n" +
+                "Q - Quit\n");
     }
 
 

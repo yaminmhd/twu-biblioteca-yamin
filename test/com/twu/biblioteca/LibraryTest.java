@@ -4,10 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
@@ -38,8 +36,8 @@ public class LibraryTest {
     }
 
     @Test //TODO
-    public void shouldDisplayMenuOptionsToUser(){
-        library.displayMenuOptions();
+    public void shouldDisplayMenuMessageToUser(){
+        library.showMenuMessage();
         assertThat(outContent.toString(), containsString("menu"));
     }
 
