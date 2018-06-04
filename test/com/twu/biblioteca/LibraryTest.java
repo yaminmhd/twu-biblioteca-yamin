@@ -35,10 +35,14 @@ public class LibraryTest {
         assertThat(outContent.toString(), containsString("Welcome"));
     }
 
-    @Test //TODO
+    @Test
     public void shouldDisplayMenuMessageToUser(){
         library.showMenuMessage();
         assertThat(outContent.toString(), containsString("menu"));
     }
+
+
+
+
 
 }

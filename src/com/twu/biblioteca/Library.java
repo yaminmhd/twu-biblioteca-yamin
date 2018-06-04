@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
-    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private ArrayList<Book> bookList = new ArrayList<>();
 
     public Book getBook(int index) {
         return bookList.get(index-1);
@@ -40,6 +40,13 @@ public class Library {
                 displayBooks();
                 break;
 
+            case "2":
+                System.out.println("Enter the id of the book you plan to checkout");
+                Scanner in = new Scanner(System.in);
+                int index = in.nextInt();
+                checkoutBook(index);
+                break;
+
             case "q":
                 break;
 
@@ -48,14 +55,31 @@ public class Library {
         }
     }
 
+    public void checkoutBook(int index) {
+        Book book;
+        if(index <= 0 || index > bookList.size()){
+            System.out.println("Book id does not exist! Try again with another id");
+            return;
+        }
+        book = getBook(index);
+        if(!book.getIsBookAvailable()){
+            System.out.println("That book is not available");
+        }else{
+            book.setBookAvailable(false);
+            System.out.println("Thank you! Enjoy the book");
+        }
+
+    }
+
     public String getInput() {
         Scanner in = new Scanner(System.in);
-        return in.next().toLowerCase();
+        return in.nextLine().toLowerCase();
     }
 
     public void showMenuMessage() {
         System.out.println("\nChoose a menu option\n\n" +
                 "1 - List Books\n" +
+                "2 - Check out Book\n" +
                 "Q - Quit\n");
     }
 
@@ -68,13 +92,17 @@ public class Library {
     }
 
     private void displayBooks(){
-        String titleTemplate = "%-20s %-20s %-6s%n";
-        String template = "%-20s %-20s %-6s%n";
-        System.out.printf(titleTemplate, "Name", "Author", "Year Published");
+        String titleTemplate = "%-5s %-20s %-20s %-15s %-6s%n";
+        String template = "%-5s %-20s %-20s %-15s %-6s%n";
+        System.out.println("***************Book List**********************");
+        System.out.printf(titleTemplate, "Id", "Name", "Author", "Year Published", "Available");
+        int index = 1;
         for(Book book : bookList){
-            System.out.printf(template, book.getName(),
-                    book.getAuthor(), book.getYearPublished());
+            System.out.printf(template, index, book.getName(),
+                    book.getAuthor(), book.getYearPublished(), book.getIsBookAvailable());
+            index++;
         }
+        System.out.println("***************End of Book List***************");
     }
 
 

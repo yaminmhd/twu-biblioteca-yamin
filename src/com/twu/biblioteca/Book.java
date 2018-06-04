@@ -4,6 +4,7 @@ public class Book {
     private String name;
     private String author;
     private int yearPublished;
+    private boolean isBookAvailable = true;
 
     public Book(String name, String author, int yearPublished) {
         this.name = name;
@@ -33,5 +34,13 @@ public class Book {
 
     public void setYearPublished(int yearPublished) {
         this.yearPublished = yearPublished;
+    }
+
+    public boolean getIsBookAvailable() {
+        return isBookAvailable;
+    }
+
+    public void setBookAvailable(boolean bookAvailable) {
+        this.isBookAvailable = bookAvailable;
     }
 }
