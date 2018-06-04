@@ -9,5 +9,5 @@ Instructions to open and run code in Intellij
 5. Go to libraries tab and click on the + button and add library from Java and choose both `junit` and `hamcrest-core` folders in the `lib` folder
 4. Open Project Explorer `cmd+1`
 5. Navigate to main method to trigger application with `cmd+o` typing `BibliotecaApp`
-6. Run the file with `cmd+shift+r` or click on the play button beside the method
+6. Run the file with `ctrl+shift+r` or click on the play button beside the method
 
