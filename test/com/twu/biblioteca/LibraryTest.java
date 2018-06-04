@@ -41,6 +41,41 @@ public class LibraryTest {
         assertThat(outContent.toString(), containsString("menu"));
     }
 
+    @Test
+    public void shouldBeAbletoAddToBookList(){
+        Book testBook = new Book("Test Book", "Tester", 1995);
+        library.addBook(testBook);
+        assertEquals(1, library.bookList.size());
+    }
+
+    @Test
+    public void shouldBeAbleToCheckoutAvailableBook(){
+        library.addBook(new Book("Junit Book", "Junit", 1995));
+        library.addBook(new Book("TestNG Book", "Test NG", 1996));
+
+        library.checkoutBook(1);
+        assertEquals(false, library.getBook(1).getIsBookAvailable());
+    }
+
+    @Test
+    public void shouldNotBeAbleToCheckoutBookIfNotAvailable(){
+        library.addBook(new Book("Junit Book", "Junit", 1995));
+        library.addBook(new Book("TestNG Book", "Test NG", 1996));
+
+        library.getBook(1).setBookAvailable(false);
+        library.checkoutBook(1);
+        assertEquals("That book is not available\n", outContent.toString());
+    }
+
+    @Test
+    public void shouldNotBeAbleToCheckoutBookIfIdDoesNotExist(){
+        library.addBook(new Book("Junit Book", "Junit", 1995));
+        library.addBook(new Book("TestNG Book", "Test NG", 1996));
+        library.checkoutBook(0);
+        assertEquals("Book id does not exist! Try again with another id\n", outContent.toString());
+    }
+
+
 
 
 

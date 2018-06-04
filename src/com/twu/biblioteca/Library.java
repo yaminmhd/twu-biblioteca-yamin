@@ -4,14 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
-    private ArrayList<Book> bookList = new ArrayList<>();
+    public ArrayList<Book> bookList = new ArrayList<>();
+    public ArrayList<Book> checkedOutBookList = new ArrayList<>();
 
     public Book getBook(int index) {
         return bookList.get(index-1);
     }
 
+    public Book getCheckedoutBook(int index) {
+        return checkedOutBookList.get(index-1);
+    }
+
     public void addBook(Book book) {
         bookList.add(book);
+    }
+
+    public void addToCheckoutListBook(Book book) {
+        checkedOutBookList.add(book);
     }
 
     public void start(){
@@ -42,9 +51,19 @@ public class Library {
 
             case "2":
                 System.out.println("Enter the id of the book you plan to checkout");
-                Scanner in = new Scanner(System.in);
-                int index = in.nextInt();
+                int index = getIndexInput();
                 checkoutBook(index);
+                break;
+
+            case "3":
+                if(checkedOutBookList.size() == 0){
+                    System.out.println("You have not checked out any books!");
+                    break;
+                }
+                displayCheckedoutBooks();
+                System.out.println("Enter the id of the book you plan to return");
+                int returnBookIndex = getIndexInput();
+                returnBook(returnBookIndex);
                 break;
 
             case "q":
@@ -52,6 +71,33 @@ public class Library {
 
             default:
                 System.out.println("Select a valid option!");
+        }
+    }
+
+    private void returnBook(int returnBookIndex) {
+        Book book;
+        if(returnBookIndex <= 0 || returnBookIndex > checkedOutBookList.size()){
+            System.out.println("That is not a valid book to return");
+            return;
+        }
+
+        book = getCheckedoutBook(returnBookIndex);
+        checkedOutBookList.remove(book);
+        bookList.add(book);
+        System.out.println("Thank you for returning the book");
+    }
+
+    private int getIndexInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextInt();
+    }
+
+    public void displayCheckedoutBooks() {
+        System.out.println("Here's a list of your checked out books\n");
+        int index = 1;
+        for(Book book: checkedOutBookList){
+            System.out.println(index + " " + book.getName());
+            index++;
         }
     }
 
@@ -66,6 +112,8 @@ public class Library {
             System.out.println("That book is not available");
         }else{
             book.setBookAvailable(false);
+            bookList.remove(book);
+            addToCheckoutListBook(book);
             System.out.println("Thank you! Enjoy the book");
         }
 
@@ -80,6 +128,7 @@ public class Library {
         System.out.println("\nChoose a menu option\n\n" +
                 "1 - List Books\n" +
                 "2 - Check out Book\n" +
+                "3 - Return book\n" +
                 "Q - Quit\n");
     }
 
