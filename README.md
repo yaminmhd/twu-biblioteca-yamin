@@ -1,3 +1,5 @@
+### Biblioteca
+
 Instructions to push your code to code.google.com
 =================================================
 1. Sign into GitHub and create a new repository
@@ -23,7 +25,8 @@ Instructions to push your code to code.google.com
 
 Instructions to open your code in Intellij
 ==========================================
-1. Go to File -> Open (or Open Project)
-2. Select the directory containing the code
+1. `git clone`
+2. Go to File -> Open (or Open Project)
+3. Select the directory containing the code
 DONE !
 

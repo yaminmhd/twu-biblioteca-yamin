@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
@@ -107,10 +106,4 @@ public class LibraryTest {
         library.returnBook(5);
         assertThat(outContent.toString(), containsString("That is not a valid book to return"));
     }
-
-
-
-
-
-
 }
