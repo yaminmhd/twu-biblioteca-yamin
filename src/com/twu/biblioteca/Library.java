@@ -57,7 +57,7 @@ public class Library {
 
             case "3":
                 if(checkedOutBookList.size() == 0){
-                    System.out.println("You have not checked out any books!");
+                    System.out.println("You have not checked out any books!Ø");
                     break;
                 }
                 displayCheckedoutBooks();
@@ -74,7 +74,7 @@ public class Library {
         }
     }
 
-    private void returnBook(int returnBookIndex) {
+    public void returnBook(int returnBookIndex) {
         Book book;
         if(returnBookIndex <= 0 || returnBookIndex > checkedOutBookList.size()){
             System.out.println("That is not a valid book to return");
@@ -82,12 +82,13 @@ public class Library {
         }
 
         book = getCheckedoutBook(returnBookIndex);
+        book.setBookAvailable(true);
         checkedOutBookList.remove(book);
         bookList.add(book);
         System.out.println("Thank you for returning the book");
     }
 
-    private int getIndexInput() {
+        private int getIndexInput() {
         Scanner in = new Scanner(System.in);
         return in.nextInt();
     }
