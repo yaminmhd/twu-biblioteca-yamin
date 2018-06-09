@@ -65,7 +65,7 @@ public class LibraryTest {
         library.addBook(new Book("Junit Book", "Junit", 1995));
         library.addBook(new Book("TestNG Book", "Test NG", 1996));
 
-        library.getBook(1).setBookAvailable(false);
+        library.getBook(1).markBookAsBorrowed();
         library.checkoutBook(1);
         assertEquals("That book is not available\n", outContent.toString());
     }

@@ -26,24 +26,16 @@ public class Book {
         return yearPublished;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
-    }
-
     public boolean getIsBookAvailable() {
         return isBookAvailable;
     }
 
-    public void setBookAvailable(boolean bookAvailable) {
-        this.isBookAvailable = bookAvailable;
+    public void markBookAsAvailable(){
+        this.isBookAvailable = true;
+    }
+
+    public void markBookAsBorrowed(){
+        this.isBookAvailable = false;
     }
 
     public static void displayBook(ArrayList<Book> list){

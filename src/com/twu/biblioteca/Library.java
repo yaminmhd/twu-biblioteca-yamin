@@ -82,7 +82,7 @@ public class Library {
         }
 
         book = getCheckedoutBook(returnBookIndex);
-        book.setBookAvailable(true);
+        book.markBookAsAvailable();
         checkedOutBookList.remove(book);
         bookList.add(book);
         System.out.println("Thank you for returning the book");
@@ -103,7 +103,7 @@ public class Library {
         if (!book.getIsBookAvailable()) {
             System.out.println("That book is not available");
         } else {
-            book.setBookAvailable(false);
+            book.markBookAsBorrowed();
             bookList.remove(book);
             addToCheckoutListBook(book);
             System.out.println("Thank you! Enjoy the book");
