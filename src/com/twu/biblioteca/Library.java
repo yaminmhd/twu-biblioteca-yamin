@@ -8,11 +8,11 @@ public class Library {
     public ArrayList<Book> checkedOutBookList = new ArrayList<>();
 
     public Book getBook(int index) {
-        return bookList.get(index-1);
+        return bookList.get(index - 1);
     }
 
     public Book getCheckedoutBook(int index) {
-        return checkedOutBookList.get(index-1);
+        return checkedOutBookList.get(index - 1);
     }
 
     public void addBook(Book book) {
@@ -23,7 +23,7 @@ public class Library {
         checkedOutBookList.add(book);
     }
 
-    public void start(){
+    public void start() {
         setupBookList();
         displayOpeningMessage();
         displayMenuOptions();
@@ -36,17 +36,17 @@ public class Library {
 
     public void displayMenuOptions() {
         String choice;
-        do{
+        do {
             showMenuMessage();
             choice = getInput();
             selectMenuOptionWithChoice(choice);
-        } while(!choice.equals("q"));
+        } while (!choice.equals("q"));
     }
 
     public void selectMenuOptionWithChoice(String choice) {
-        switch(choice){
+        switch (choice) {
             case "1":
-                displayBooks();
+                Book.displayBook(bookList);
                 break;
 
             case "2":
@@ -56,11 +56,11 @@ public class Library {
                 break;
 
             case "3":
-                if(checkedOutBookList.size() == 0){
+                if (checkedOutBookList.size() == 0) {
                     System.out.println("You have not checked out any books!Ø");
                     break;
                 }
-                displayCheckedoutBooks();
+                Book.displayBook(checkedOutBookList);
                 System.out.println("Enter the id of the book you plan to return");
                 int returnBookIndex = getIndexInput();
                 returnBook(returnBookIndex);
@@ -76,7 +76,7 @@ public class Library {
 
     public void returnBook(int returnBookIndex) {
         Book book;
-        if(returnBookIndex <= 0 || returnBookIndex > checkedOutBookList.size()){
+        if (returnBookIndex <= 0 || returnBookIndex > checkedOutBookList.size()) {
             System.out.println("That is not a valid book to return");
             return;
         }
@@ -88,30 +88,21 @@ public class Library {
         System.out.println("Thank you for returning the book");
     }
 
-        private int getIndexInput() {
+    public int getIndexInput() {
         Scanner in = new Scanner(System.in);
         return in.nextInt();
     }
 
-    public void displayCheckedoutBooks() {
-        System.out.println("Here's a list of your checked out books\n");
-        int index = 1;
-        for(Book book: checkedOutBookList){
-            System.out.println(index + " " + book.getName());
-            index++;
-        }
-    }
-
     public void checkoutBook(int index) {
         Book book;
-        if(index <= 0 || index > bookList.size()){
+        if (index <= 0 || index > bookList.size()) {
             System.out.println("Book id does not exist! Try again with another id");
             return;
         }
         book = getBook(index);
-        if(!book.getIsBookAvailable()){
+        if (!book.getIsBookAvailable()) {
             System.out.println("That book is not available");
-        }else{
+        } else {
             book.setBookAvailable(false);
             bookList.remove(book);
             addToCheckoutListBook(book);
@@ -120,7 +111,7 @@ public class Library {
 
     }
 
-    public String getInput() {
+    private String getInput() {
         Scanner in = new Scanner(System.in);
         return in.nextLine().toLowerCase();
     }
@@ -133,27 +124,10 @@ public class Library {
                 "Q - Quit\n");
     }
 
-
     private void setupBookList() {
         addBook(new Book("Harry Potter", "J.K Rowling", 1999));
         addBook(new Book("Lord Of The Rings", "Peter Jackson", 2001));
         addBook(new Book("Game Of Thrones", "Stephen Smith", 2007));
         addBook(new Book("Head First Java", "Kathy Sierra", 2010));
     }
-
-    private void displayBooks(){
-        String titleTemplate = "%-5s %-20s %-20s %-15s %-6s%n";
-        String template = "%-5s %-20s %-20s %-15s %-6s%n";
-        System.out.println("***************Book List**********************");
-        System.out.printf(titleTemplate, "Id", "Name", "Author", "Year Published", "Available");
-        int index = 1;
-        for(Book book : bookList){
-            System.out.printf(template, index, book.getName(),
-                    book.getAuthor(), book.getYearPublished(), book.getIsBookAvailable());
-            index++;
-        }
-        System.out.println("***************End of Book List***************");
-    }
-
-
 }
