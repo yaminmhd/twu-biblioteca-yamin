@@ -1,40 +1,21 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
-    public ArrayList<Book> bookList = new ArrayList<>();
-    public ArrayList<Book> checkedOutBookList = new ArrayList<>();
+    BookDB db = new BookDB();
 
-    public Book getBook(int index) {
-        return bookList.get(index - 1);
-    }
-
-    public Book getCheckedoutBook(int index) {
-        return checkedOutBookList.get(index - 1);
-    }
-
-    public void addBook(Book book) {
-        bookList.add(book);
-    }
-
-    public void addToCheckoutListBook(Book book) {
-        checkedOutBookList.add(book);
-    }
-
-    public void start() {
-        setupBookList();
+    void start() {
         displayOpeningMessage();
         displayMenuOptions();
     }
 
-    public void displayOpeningMessage() {
+    void displayOpeningMessage() {
         System.out.println("Welcome to Biblioteca!");
-        System.out.println("Total of " + bookList.size() + " books in the library");
+        System.out.println("Total of " + db.bookList.size() + " books in the library");
     }
 
-    public void displayMenuOptions() {
+    void displayMenuOptions() {
         String choice;
         do {
             showMenuMessage();
@@ -43,27 +24,27 @@ public class Library {
         } while (!choice.equals("q"));
     }
 
-    public void selectMenuOptionWithChoice(String choice) {
+    private void selectMenuOptionWithChoice(String choice) {
         switch (choice) {
             case "1":
-                Book.displayBook(bookList);
+                Book.displayBook(db.bookList);
                 break;
 
             case "2":
                 System.out.println("Enter the id of the book you plan to checkout");
                 int index = getIndexInput();
-                checkoutBook(index);
+                db.checkoutBook(index);
                 break;
 
             case "3":
-                if (checkedOutBookList.size() == 0) {
+                if (db.checkedOutBookList.size() == 0) {
                     System.out.println("You have not checked out any books!Ø");
                     break;
                 }
-                Book.displayBook(checkedOutBookList);
+                Book.displayBook(db.checkedOutBookList);
                 System.out.println("Enter the id of the book you plan to return");
                 int returnBookIndex = getIndexInput();
-                returnBook(returnBookIndex);
+                db.returnBook(returnBookIndex);
                 break;
 
             case "q":
@@ -74,49 +55,8 @@ public class Library {
         }
     }
 
-    public void returnBook(int returnBookIndex) {
-        Book book;
-        if (returnBookIndex <= 0 || returnBookIndex > checkedOutBookList.size()) {
-            System.out.println("That is not a valid book to return");
-            return;
-        }
 
-        book = getCheckedoutBook(returnBookIndex);
-        book.markBookAsAvailable();
-        checkedOutBookList.remove(book);
-        bookList.add(book);
-        System.out.println("Thank you for returning the book");
-    }
-
-    public int getIndexInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextInt();
-    }
-
-    public void checkoutBook(int index) {
-        Book book;
-        if (index <= 0 || index > bookList.size()) {
-            System.out.println("Book id does not exist! Try again with another id");
-            return;
-        }
-        book = getBook(index);
-        if (!book.getIsBookAvailable()) {
-            System.out.println("That book is not available");
-        } else {
-            book.markBookAsBorrowed();
-            bookList.remove(book);
-            addToCheckoutListBook(book);
-            System.out.println("Thank you! Enjoy the book");
-        }
-
-    }
-
-    private String getInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine().toLowerCase();
-    }
-
-    public void showMenuMessage() {
+    void showMenuMessage() {
         System.out.println("\nChoose a menu option\n\n" +
                 "1 - List Books\n" +
                 "2 - Check out Book\n" +
@@ -124,10 +64,15 @@ public class Library {
                 "Q - Quit\n");
     }
 
-    private void setupBookList() {
-        addBook(new Book("Harry Potter", "J.K Rowling", 1999));
-        addBook(new Book("Lord Of The Rings", "Peter Jackson", 2001));
-        addBook(new Book("Game Of Thrones", "Stephen Smith", 2007));
-        addBook(new Book("Head First Java", "Kathy Sierra", 2010));
+    private String getInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextLine().toLowerCase();
     }
+
+    private int getIndexInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextInt();
+    }
+
+
 }
