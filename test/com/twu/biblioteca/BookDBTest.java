@@ -45,8 +45,8 @@ public class BookDBTest {
 
     @Test
     public void shouldNotBeAbleToCheckoutBookIfNotAvailable(){
-//        db.addBook(new Book("Junit Book", "Junit", 1995));
-//        db.addBook(new Book("TestNG Book", "Test NG", 1996));
+//        bookDB.addBook(new Book("Junit Book", "Junit", 1995));
+//        bookDB.addBook(new Book("TestNG Book", "Test NG", 1996));
 
         db.getBook(1).markBookAsBorrowed();
         db.checkoutBook(1);
@@ -55,16 +55,16 @@ public class BookDBTest {
 
     @Test
     public void shouldNotBeAbleToCheckoutBookIfIdDoesNotExist(){
-//        db.addBook(new Book("Junit Book", "Junit", 1995));
-//        db.addBook(new Book("TestNG Book", "Test NG", 1996));
+//        bookDB.addBook(new Book("Junit Book", "Junit", 1995));
+//        bookDB.addBook(new Book("TestNG Book", "Test NG", 1996));
         db.checkoutBook(0);
         assertEquals("Book id does not exist! Try again with another id\n", outContent.toString());
     }
 
     @Test
     public void shouldBeAbleToReturnCheckoutBook(){
-//        db.addBook(new Book("Junit Book", "Junit", 1995));
-//        db.addBook(new Book("TestNG Book", "Test NG", 1996));
+//        bookDB.addBook(new Book("Junit Book", "Junit", 1995));
+//        bookDB.addBook(new Book("TestNG Book", "Test NG", 1996));
         db.checkoutBook(1);
         db.returnBook(1);
         assertEquals(4, db.bookList.size());
@@ -74,8 +74,8 @@ public class BookDBTest {
 
     @Test
     public void shouldNotBeAbleToReturnCheckoutBookIfIdIsOutOfIndex(){
-//        db.addBook(new Book("Junit Book", "Junit", 1995));
-//        db.addBook(new Book("TestNG Book", "Test NG", 1996));
+//        bookDB.addBook(new Book("Junit Book", "Junit", 1995));
+//        bookDB.addBook(new Book("TestNG Book", "Test NG", 1996));
         db.checkoutBook(1);
         db.returnBook(0);
         assertThat(outContent.toString(), containsString("That is not a valid book to return"));
@@ -83,8 +83,8 @@ public class BookDBTest {
 
     @Test
     public void shouldNotBeAbleToReturnCheckoutBookIfIdIsAboveTheSizeOfList(){
-//        db.addBook(new Book("Junit Book", "Junit", 1995));
-//        db.addBook(new Book("TestNG Book", "Test NG", 1996));
+//        bookDB.addBook(new Book("Junit Book", "Junit", 1995));
+//        bookDB.addBook(new Book("TestNG Book", "Test NG", 1996));
         db.checkoutBook(1);
         db.returnBook(5);
         assertThat(outContent.toString(), containsString("That is not a valid book to return"));
