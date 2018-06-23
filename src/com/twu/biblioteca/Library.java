@@ -34,8 +34,7 @@ public class Library {
 
             case "2":
                 System.out.println("Enter the id of the book you plan to checkout");
-                int index = getIndexInput();
-                bookDB.checkoutBook(index);
+                bookDB.checkoutBook(getIndexInput());
                 break;
 
             case "3":
@@ -45,12 +44,16 @@ public class Library {
                 }
                 Book.displayBook(bookDB.checkedOutBookList);
                 System.out.println("Enter the id of the book you plan to return");
-                int returnBookIndex = getIndexInput();
-                bookDB.returnBook(returnBookIndex);
+                bookDB.returnBook(getIndexInput());
                 break;
 
             case "4":
                 Movie.displayMovie(movieDB.movieList);
+                break;
+
+            case "5":
+                System.out.println("Enter the id of the movie you plan to checkout");
+                movieDB.checkoutMovie(getIndexInput());
                 break;
 
             case "q":

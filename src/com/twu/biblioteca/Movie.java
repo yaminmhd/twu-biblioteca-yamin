@@ -7,6 +7,7 @@ public class Movie {
     private int year;
     private String director;
     private int rating = 0;
+    private boolean isMovieAvailable = true;
 
     public Movie(String title, int year, String director) {
         this.title = title;
@@ -41,6 +42,17 @@ public class Movie {
        if(newRating > 0 && newRating <= 10){
            this.rating = newRating;
        }
+    }
+
+    public boolean getIsMovieAvailable(){
+        return isMovieAvailable;
+    }
+    public void markMovieAsAvailable(){
+        this.isMovieAvailable = true;
+    }
+
+    public void markMovieAsBorrowed(){
+        this.isMovieAvailable = false;
     }
 
     public static void displayMovie(ArrayList<Movie> list){
