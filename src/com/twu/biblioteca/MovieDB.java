@@ -42,8 +42,4 @@ public class MovieDB {
     void addToCheckoutListMovie(Movie movie){
         checkedOutMovieList.add(movie);
     }
-
-
-
-
 }

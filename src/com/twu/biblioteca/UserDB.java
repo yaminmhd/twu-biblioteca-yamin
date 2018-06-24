@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class UserDB {
     ArrayList<User> usersList = new ArrayList<>();
     User currentUser;
-
+    BookDB bookDB;
+    MovieDB movieDB;
 
     UserDB(){
-        addUser(new User("yamin",  "123", "000-0001"));
-        addUser(new User("dave", "12345", "000-0002"));
-        addUser(new User("jack", "123456", "000-0003"));
+        addUser(new User("yamin",  "123", "000-0001", "yamin@gmail.com", 97899034));
+        addUser(new User("dave", "12345", "000-0002", "dave@gmail.com", 12332313));
+        addUser(new User("jack", "123456", "000-0003", "jack@gmail.com", 89761234));
     }
 
     void addUser(User user) {
@@ -25,6 +26,21 @@ public class UserDB {
             }
         }
         return result;
+    }
+
+    User getCurrentUser(){
+        return currentUser;
+    }
+
+    void displayUserDetails(User currentUser, ArrayList<Book> bookList){
+        System.out.println("Here are your details");
+        System.out.println("Name: " + currentUser.getUsername());
+        System.out.println("Library Number: " + currentUser.getLibraryNumber());
+        System.out.println("Email Address: " + currentUser.getEmailAddress());
+        System.out.println("Phone Number: " + currentUser.getPhoneNumber());
+        for(Book book: bookList){
+            System.out.println("Books checked out by you - " + book.getName());
+        }
     }
 
     void logout(User user){

@@ -42,7 +42,6 @@ public class Library {
                 break;
 
             case "3":
-
                 if (bookDB.checkedOutBookList.size() == 0) {
                     System.out.println("You have not checked out any books!");
                     break;
@@ -58,13 +57,15 @@ public class Library {
                 break;
 
             case "5":
-
                 System.out.println("Enter the id of the movie you plan to checkout");
                 movieDB.checkoutMovie(getIndexInput());
-
                 break;
 
             case "6":
+               userDB.displayUserDetails(userDB.getCurrentUser(), bookDB.checkedOutBookList);
+               break;
+
+            case "7":
                 if (userDB.isUserLoggedIn()) {
                     userDB.logout(userDB.currentUser);
                 } else {
@@ -94,19 +95,20 @@ public class Library {
 
 
     void showMenuMessage() {
-        String checkStatus = (userDB.isUserLoggedIn()) ? "6 - Logout\n" : "6 - Login\n";
+        String checkStatus = (userDB.isUserLoggedIn()) ? "7 - Logout\n" : "7 - Login\n";
         System.out.println("\nChoose a menu option\n\n" +
                 "1 - List Books\n" +
                 "2 - Check out Book\n" +
                 "3 - Return book\n" +
                 "4 - List Movies\n" +
                 "5 - Check out Movie\n" +
+                "6 - Display current user details\n" +
                 checkStatus +
                 "Q - Quit\n");
     }
 
     private void checkForInputThatRequiresLogin(String input) {
-        if (input.equals("2") || input.equals("3") || input.equals("5")) {
+        if (input.equals("2") || input.equals("3") || input.equals("5") || input.equals("6"))  {
             if (userDB.isUserLoggedIn()) {
                 selectMenuOptionWithChoice(input);
             } else {

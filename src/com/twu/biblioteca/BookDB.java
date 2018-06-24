@@ -28,7 +28,6 @@ public class BookDB {
         System.out.println("Thank you for returning the book");
     }
 
-
     void checkoutBook(int index) {
         Book book;
         if (index <= 0 || index > bookList.size()) {
@@ -49,6 +48,10 @@ public class BookDB {
 
     Book getBook(int index) {
         return bookList.get(index - 1);
+    }
+
+    ArrayList<Book> getCheckedOutBookList(){
+        return checkedOutBookList;
     }
 
     Book getCheckedoutBook(int index) {
