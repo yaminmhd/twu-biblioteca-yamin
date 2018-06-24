@@ -20,6 +20,7 @@ public class MovieDB {
     void addMovie(Movie movie){
         movieList.add(movie);
     }
+
     void checkoutMovie(int index){
         Movie movie;
         if (index <= 0 || index > movieList.size()) {
